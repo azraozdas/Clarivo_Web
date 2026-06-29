@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clarivo — Stock Detail</title>
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <!-- Google Fonts — Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <header>
+        <nav class="navbar navbar-expand-lg clarivo-navbar" id="mainNav">
+            <div class="container">
+
+                <a class="navbar-brand clarivo-brand" href="index.html">
+                    <img src="assets/Logo.png" alt="Clarivo" class="brand-logo">
+                    <span class="brand-text">Clarivo</span>
+                </a>
+
+                <button class="navbar-toggler clarivo-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarLinks"
+                        aria-controls="navbarLinks" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarLinks">
+                    <ul class="navbar-nav clarivo-nav-list">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="market.html">Market</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active-link" href="portfolio.html">Portfolio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="news.html">News</a>
+                        </li>
+                    </ul>
+
+                    <div class="nav-actions">
+                        <span class="nav-lang">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            EN
+                        </span>
+                        <a href="auth.html" class="nav-profile-btn" id="navProfileBtn" aria-label="Profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </a>
+                        <a href="pro.html" class="btn btn-clarivo-cta">Upgrade</a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== STOCK DETAIL CONTENT ===== -->
+    <main class="sd-page-section" id="stockDetailMain">
+        <div class="container">
+
+            <!-- Back link + notification header -->
+            <div class="sd-top-bar">
+                <a href="portfolio.html" class="sd-back-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    Back to Portfolio
+                </a>
+                <button class="page-icon-btn" aria-label="Notifications">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    <span class="pf-notify-dot"></span>
+                </button>
+            </div>
+
+            <!-- Page heading (company name) -->
+            <h1 class="sd-page-heading" id="sdHeaderName">Apple Inc.</h1>
+
+            <!-- ===== MAIN STOCK CARD ===== -->
+            <div class="sd-main-card">
+                <div class="sd-main-inner">
+                    <img id="sdLogoImg"
+                         src=""
+                         alt=""
+                         class="sd-stock-logo"
+                         style="display:none;"
+                         onerror="this.style.display='none';document.getElementById('sdLogoFallback').style.display='flex'">
+                    <div id="sdLogoFallback"
+                         class="pf-stock-fallback stock-logo-placeholder apple"
+                         aria-hidden="true">A</div>
+                    <div>
+                        <p class="sd-stock-name" id="sdStockName">Apple Inc.</p>
+                        <p class="sd-stock-ticker" id="sdStockTicker">AAPL</p>
+                    </div>
+                </div>
+                <div class="sd-price-row">
+                    <p class="sd-price" id="sdStockPrice">€1,924.50</p>
+                    <span class="sd-main-badge positive-badge" id="sdStockChange">↑ +1.8%</span>
+                </div>
+            </div>
+
+            <!-- ===== PERFORMANCE CHART ===== -->
+            <div class="sd-chart-card">
+                <div class="sd-chart-header">
+                    <p class="sd-chart-title">Stock Performance</p>
+                    <div class="pf-time-tabs" id="sdTimeTabs" role="group" aria-label="Chart time period">
+                        <button class="pf-time-tab" data-period="1D">1D</button>
+                        <button class="pf-time-tab active" data-period="1W">1W</button>
+                        <button class="pf-time-tab" data-period="1M">1M</button>
+                        <button class="pf-time-tab" data-period="3M">3M</button>
+                        <button class="pf-time-tab" data-period="1Y">1Y</button>
+                        <button class="pf-time-tab" data-period="ALL">ALL</button>
+                    </div>
+                </div>
+                <div class="sd-chart-wrap">
+                    <canvas id="stockChart" aria-label="Stock performance chart"></canvas>
+                </div>
+            </div>
+
+            <!-- ===== BUY / SELL ===== -->
+            <div class="sd-action-row">
+                <button class="sd-btn-buy" id="sdBtnBuy">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+                    Buy
+                </button>
+                <button class="sd-btn-sell" id="sdBtnSell">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                    Sell
+                </button>
+            </div>
+
+            <!-- ===== YOUR HOLDING ===== -->
+            <div class="pf-section-card mb-4">
+                <h2 class="pf-section-heading">Your Holding</h2>
+                <div class="row gy-3">
+                    <div class="col-6">
+                        <div class="sd-info-card">
+                            <p class="sd-info-label">Shares</p>
+                            <p class="sd-info-value" id="sdHoldingShares">0 shares</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="sd-info-card">
+                            <p class="sd-info-label">Current value</p>
+                            <p class="sd-info-value" id="sdHoldingValue">€0.00</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="sd-news-time" id="sdTradeMessage" style="margin-top:10px;"></p>
+            </div>
+
+            <!-- ===== KEY INFORMATION ===== -->
+            <div class="pf-section-card mb-4">
+                <h2 class="pf-section-heading">Key Information</h2>
+                <div class="row gy-3">
+                    <div class="col-6 col-md-4">
+                        <div class="sd-info-card">
+                            <p class="sd-info-label">Open</p>
+                            <p class="sd-info-value" id="sdOpen">€191.20</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="sd-info-card">
+                            <p class="sd-info-label">High</p>
+                            <p class="sd-info-value positive" id="sdHigh">€194.80</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="sd-info-card">
+                            <p class="sd-info-label">Low</p>
+                            <p class="sd-info-value negative" id="sdLow">€190.50</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="sd-info-card">
+                            <p class="sd-info-label">Volume</p>
+                            <p class="sd-info-value" id="sdVolume">52.3M</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="sd-info-card">
+                            <p class="sd-info-label">Market Cap</p>
+                            <p class="sd-info-value" id="sdMarketCap">—</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="sd-info-card">
+                            <p class="sd-info-label">Currency</p>
+                            <p class="sd-info-value" id="sdCurrency">EUR</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== RELATED NEWS ===== -->
+            <div class="pf-section-card">
+                <h2 class="pf-section-heading">Related News</h2>
+                <div id="sdNewsContainer">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="clarivo-footer">
+        <div class="container">
+
+            <div class="row gy-5 footer-grid">
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand-block">
+                        <div class="footer-brand">
+                            <img src="assets/Logo.png" alt="Clarivo" class="footer-logo">
+                            <span class="footer-brand-name">Clarivo</span>
+                        </div>
+                        <p class="footer-desc">Smart market insights for everyday investors.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg col-md-6 col-6">
+                    <p class="footer-col-title">Company</p>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg col-md-6 col-6">
+                    <p class="footer-col-title">Support</p>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg col-md-6 col-6">
+                    <p class="footer-col-title">Legal</p>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-social">
+                <a href="#" class="footer-social-btn" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="#" class="footer-social-btn" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="#" class="footer-social-btn" aria-label="X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="#" class="footer-social-btn" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                </a>
+            </div>
+
+            <div class="footer-divider"></div>
+            <p class="footer-copy">&copy; 2026 Clarivo. All rights reserved.</p>
+
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script src="config.example.js"></script>
+    <script src="config.js"></script>
+    <script src="stock-data-service.js"></script>
+    <script src="holdings.js"></script>
+    <script src="libs/chart.min.js"></script>
+    <script src="api.js"></script>
+
+</body>
+</html>

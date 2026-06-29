@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clarivo — Market News</title>
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <!-- Google Fonts — Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header>
+    <nav class="navbar navbar-expand-lg clarivo-navbar" id="mainNav">
+        <div class="container">
+
+            <a class="navbar-brand clarivo-brand" href="index.html">
+                <img src="assets/Logo.png" alt="Clarivo" class="brand-logo">
+                <span class="brand-text">Clarivo</span>
+            </a>
+
+            <button class="navbar-toggler clarivo-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarLinks"
+                    aria-controls="navbarLinks" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarLinks">
+                <ul class="navbar-nav clarivo-nav-list">
+                    <li class="nav-item"><a class="nav-link" href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="market.html" data-i18n="nav.market">Market</a></li>
+                    <li class="nav-item"><a class="nav-link" href="portfolio.html" data-i18n="nav.portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link active-link" href="news.html" data-i18n="nav.news">News</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <div class="nav-lang-dropdown" id="navLangDropdown">
+                        <button class="nav-lang nav-lang-toggle" type="button" id="navLangToggle" aria-haspopup="listbox" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            <span id="navLangLabel">EN</span>
+                        </button>
+                        <ul class="nav-lang-menu" id="navLangMenu" role="listbox" aria-label="Select language">
+                            <li><button type="button" class="nav-lang-option active" data-lang="EN" role="option">EN</button></li>
+                            <li><button type="button" class="nav-lang-option" data-lang="TR" role="option">TR</button></li>
+                            <li><button type="button" class="nav-lang-option" data-lang="DE" role="option">DE</button></li>
+                        </ul>
+                    </div>
+                    <a href="auth.html" class="nav-profile-btn" id="navProfileBtn" data-i18n-aria="nav.profile" aria-label="Profile">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </a>
+                    <a href="pro.html" class="btn btn-clarivo-cta" data-i18n="nav.upgrade">Upgrade</a>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="news-hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <!-- Left: heading + search -->
+            <div class="col-lg-7 col-md-8">
+                <span class="news-hero-eyebrow" data-i18n="hero.liveUpdates">Live Updates</span>
+                <h1 class="news-hero-heading" data-i18n="hero.title">Market News</h1>
+                <p class="news-hero-subtitle" data-i18n="hero.subtitle">Stay updated with the latest stock market movements and financial news.</p>
+
+                <div class="news-search-row">
+                    <div class="news-search-wrap">
+                        <svg class="news-search-icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input
+                            id="newsSearchInput"
+                            type="search"
+                            class="news-search-input"
+                            data-i18n-placeholder="hero.searchPlaceholder"
+                            placeholder="Search news, companies, or markets…"
+                            aria-label="Search news"
+                            autocomplete="off">
+                    </div>
+                    <button class="news-filter-btn" aria-label="Filter options">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right: CSS decorative globe -->
+            <div class="col-lg-5 col-md-4 d-none d-md-flex justify-content-end">
+                <div class="news-globe-wrap" aria-hidden="true">
+                    <div class="news-globe">
+                        <div class="globe-ring globe-ring-1"></div>
+                        <div class="globe-ring globe-ring-2"></div>
+                        <div class="globe-ring globe-ring-3"></div>
+                        <div class="globe-dot-grid"></div>
+                        <div class="globe-glow"></div>
+                        <!-- Floating ticker chips -->
+                        <span class="globe-ticker gt-1">AAPL +1.8%</span>
+                        <span class="globe-ticker gt-2">TSLA -0.9%</span>
+                        <span class="globe-ticker gt-3">NVDA +1.4%</span>
+                        <span class="globe-ticker gt-4">MSFT +0.7%</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== MARKET SNAPSHOT ===== -->
+<section class="news-snapshot-section">
+    <div class="container">
+
+        <div class="news-snapshot-header">
+            <h2 class="news-section-title" data-i18n="section.marketSnapshot">Market Snapshot</h2>
+            <span class="ms-live-badge">
+                <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--color-positive);margin-right:5px;vertical-align:middle;"></span>
+                <span data-i18n="section.live">Live</span>
+            </span>
+        </div>
+
+        <div class="news-snapshot-track" id="snapshotTrack">
+
+            <!-- AAPL -->
+            <a class="ns-card" href="stock-detail.html?ticker=AAPL" data-searchable data-search-keywords="apple aapl apple inc">
+                <div class="ns-card-top">
+                    <div class="ns-logo-slot">
+                        <img class="ns-logo" alt="Apple Inc." src="assets/apple_logo.png"
+                             onload="this.style.display='block';this.nextElementSibling.style.display='none'"
+                             onerror="this.style.display='none'">
+                        <div class="ns-logo-fb stock-logo-placeholder apple" aria-hidden="true">A</div>
+                    </div>
+                    <div class="ns-info">
+                        <p class="ns-name">Apple Inc.</p>
+                        <p class="ns-ticker">AAPL</p>
+                    </div>
+                </div>
+                <div class="ns-chart-wrap"><canvas class="ns-mini-chart" data-positive="true"></canvas></div>
+                <div class="ns-card-bottom">
+                    <p class="ns-price">—</p>
+                    <span class="ns-change positive-badge">Loading…</span>
+                </div>
+            </a>
+
+            <!-- TSLA -->
+            <a class="ns-card" href="stock-detail.html?ticker=TSLA" data-searchable data-search-keywords="tesla tsla">
+                <div class="ns-card-top">
+                    <div class="ns-logo-slot">
+                        <img class="ns-logo" alt="Tesla, Inc." src="assets/tesla_logo.png"
+                             onload="this.style.display='block';this.nextElementSibling.style.display='none'"
+                             onerror="this.style.display='none'">
+                        <div class="ns-logo-fb stock-logo-placeholder tesla" aria-hidden="true">T</div>
+                    </div>
+                    <div class="ns-info">
+                        <p class="ns-name">Tesla, Inc.</p>
+                        <p class="ns-ticker">TSLA</p>
+                    </div>
+                </div>
+                <div class="ns-chart-wrap"><canvas class="ns-mini-chart" data-positive="false"></canvas></div>
+                <div class="ns-card-bottom">
+                    <p class="ns-price">—</p>
+                    <span class="ns-change negative-badge">Loading…</span>
+                </div>
+            </a>
+
+            <!-- AMZN -->
+            <a class="ns-card" href="stock-detail.html?ticker=AMZN" data-searchable data-search-keywords="amazon amzn amazon.com">
+                <div class="ns-card-top">
+                    <div class="ns-logo-slot">
+                        <img class="ns-logo" alt="Amazon.com" src="assets/amazon_logo.png"
+                             onload="this.style.display='block';this.nextElementSibling.style.display='none'"
+                             onerror="this.style.display='none'">
+                        <div class="ns-logo-fb stock-logo-placeholder amazon" aria-hidden="true">A</div>
+                    </div>
+                    <div class="ns-info">
+                        <p class="ns-name">Amazon.com</p>
+                        <p class="ns-ticker">AMZN</p>
+                    </div>
+                </div>
+                <div class="ns-chart-wrap"><canvas class="ns-mini-chart" data-positive="true"></canvas></div>
+                <div class="ns-card-bottom">
+                    <p class="ns-price">—</p>
+                    <span class="ns-change positive-badge">Loading…</span>
+                </div>
+            </a>
+
+            <!-- MSFT -->
+            <a class="ns-card" href="stock-detail.html?ticker=MSFT" data-searchable data-search-keywords="microsoft msft ms">
+                <div class="ns-card-top">
+                    <div class="ns-logo-slot">
+                        <img class="ns-logo" alt="Microsoft" src="https://cdn.simpleicons.org/microsoft"
+                             onload="this.style.display='block';this.nextElementSibling.style.display='none'"
+                             onerror="this.style.display='none'">
+                        <div class="ns-logo-fb stock-logo-placeholder microsoft" aria-hidden="true">MS</div>
+                    </div>
+                    <div class="ns-info">
+                        <p class="ns-name">Microsoft</p>
+                        <p class="ns-ticker">MSFT</p>
+                    </div>
+                </div>
+                <div class="ns-chart-wrap"><canvas class="ns-mini-chart" data-positive="true"></canvas></div>
+                <div class="ns-card-bottom">
+                    <p class="ns-price">€378.85</p>
+                    <span class="ns-change positive-badge">↑ +0.74%</span>
+                </div>
+            </a>
+
+            <!-- NVDA -->
+            <a class="ns-card" href="stock-detail.html?ticker=NVDA" data-searchable data-search-keywords="nvidia nvda nv">
+                <div class="ns-card-top">
+                    <div class="ns-logo-slot">
+                        <img class="ns-logo" alt="NVIDIA" src="https://cdn.simpleicons.org/nvidia"
+                             onload="this.style.display='block';this.nextElementSibling.style.display='none'"
+                             onerror="this.style.display='none'">
+                        <div class="ns-logo-fb stock-logo-placeholder nvidia" aria-hidden="true">NV</div>
+                    </div>
+                    <div class="ns-info">
+                        <p class="ns-name">NVIDIA</p>
+                        <p class="ns-ticker">NVDA</p>
+                    </div>
+                </div>
+                <div class="ns-chart-wrap"><canvas class="ns-mini-chart" data-positive="true"></canvas></div>
+                <div class="ns-card-bottom">
+                    <p class="ns-price">€903.12</p>
+                    <span class="ns-change positive-badge">↑ +1.35%</span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== LATEST NEWS ===== -->
+<section class="news-main-section">
+    <div class="container">
+
+        <!-- Section header + category chips -->
+        <div class="news-main-header">
+            <h2 class="news-section-title" data-i18n="section.latestNews">Latest News</h2>
+            <div class="news-chips" id="newsChips" role="group" aria-label="News categories">
+                <button class="news-chip active" data-category="all" data-i18n="chip.all">All</button>
+                <button class="news-chip" data-category="technology" data-i18n="chip.technology">Technology</button>
+                <button class="news-chip" data-category="automotive" data-i18n="chip.automotive">Automotive</button>
+                <button class="news-chip" data-category="markets" data-i18n="chip.markets">Markets</button>
+                <button class="news-chip" data-category="earnings" data-i18n="chip.earnings">Earnings</button>
+                <button class="news-chip" data-category="economy" data-i18n="chip.economy">Economy</button>
+            </div>
+        </div>
+
+        <div class="row gy-4" id="newsGrid">
+
+            <!-- ===== LEFT COLUMN ===== -->
+            <div class="col-lg-7">
+
+                <!-- Featured News Card -->
+                <article class="news-featured-card news-card-item" data-category="technology" data-searchable data-title="Tech stocks rise as investors focus on AI growth" data-search-keywords="tech ai growth technology stocks">
+                    <div class="news-featured-bg" aria-hidden="true">
+                        <div class="nfbg-grid"></div>
+                        <div class="nfbg-glow"></div>
+                    </div>
+                    <div class="news-featured-content">
+                        <span class="news-badge-featured">Featured</span>
+                        <h3 class="news-featured-title">Tech stocks rise as investors focus on AI growth</h3>
+                        <p class="news-featured-desc">Major tech companies see gains as AI innovation and cloud adoption drive strong investor sentiment.</p>
+                        <div class="news-featured-meta">
+                            <span class="news-source-dot"></span>
+                            <span class="news-meta-text">MarketWatch</span>
+                            <span class="news-meta-sep">·</span>
+                            <span class="news-meta-text">2 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- More News grid -->
+                <h3 class="news-more-heading" data-i18n="section.moreNews">More News</h3>
+                <div class="row gy-3" id="moreNewsGrid">
+
+                    <div class="col-sm-6 col-12">
+                        <article class="news-more-card news-card-item" data-category="markets" data-searchable data-title="Wall Street climbs as Fed signals rate pause">
+                            <div class="nmc-img-wrap">
+                                <div class="nmc-img-grad nmc-grad-blue">
+                                    <span class="nmc-img-label">MARKETS</span>
+                                </div>
+                            </div>
+                            <div class="nmc-body">
+                                <p class="nmc-title">Wall Street climbs as Fed signals rate pause</p>
+                                <p class="nmc-desc">Indices post broad gains after Fed officials hint at holding rates steady.</p>
+                                <p class="nmc-meta">Reuters <span class="nmc-sep">·</span> 8h ago</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-sm-6 col-12">
+                        <article class="news-more-card news-card-item" data-category="economy" data-searchable data-title="Oil prices drop on global demand concerns">
+                            <div class="nmc-img-wrap">
+                                <div class="nmc-img-grad nmc-grad-orange">
+                                    <span class="nmc-img-label">ECONOMY</span>
+                                </div>
+                            </div>
+                            <div class="nmc-body">
+                                <p class="nmc-title">Oil prices drop on global demand concerns</p>
+                                <p class="nmc-desc">Crude oil falls amid weaker demand forecasts from major energy agencies.</p>
+                                <p class="nmc-meta">Bloomberg <span class="nmc-sep">·</span> 9h ago</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-sm-6 col-12">
+                        <article class="news-more-card news-card-item" data-category="economy" data-searchable data-title="Fed officials remain cautious on inflation path">
+                            <div class="nmc-img-wrap">
+                                <div class="nmc-img-grad nmc-grad-purple">
+                                    <span class="nmc-img-label">ECONOMY</span>
+                                </div>
+                            </div>
+                            <div class="nmc-body">
+                                <p class="nmc-title">Fed officials remain cautious on inflation path</p>
+                                <p class="nmc-desc">Central bank members signal no rush to cut rates further this quarter.</p>
+                                <p class="nmc-meta">CNBC <span class="nmc-sep">·</span> 10h ago</p>
+                            </div>
+                        </article>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ===== RIGHT COLUMN ===== -->
+            <div class="col-lg-5">
+
+                <!-- News list card -->
+                <div class="news-list-card">
+                    <div id="newsListRows">
+
+                        <article class="news-list-row news-card-item" data-category="technology" data-searchable data-title="Apple announces new product updates at WWDC" data-search-keywords="apple wwdc aapl">
+                            <div class="nlr-body">
+                                <p class="nlr-title">Apple announces new product updates at WWDC</p>
+                                <p class="nlr-desc">Apple unveils its latest software innovations and AI features.</p>
+                                <p class="nlr-meta">TechCrunch <span class="nlr-sep">·</span> 3h ago</p>
+                            </div>
+                            <div class="nlr-thumb">
+                                <img class="nlr-thumb-img" alt="" src="https://cdn.simpleicons.org/apple"
+                                     onload="this.style.display='block';this.nextElementSibling.style.display='none'"
+                                     onerror="this.style.display='none'">
+                                <div class="nlr-thumb-grad nlr-grad-dark stock-logo-placeholder apple" aria-hidden="true">A</div>
+                            </div>
+                        </article>
+
+                        <article class="news-list-row news-card-item" data-category="automotive" data-searchable data-title="Tesla shares move lower after market report" data-search-keywords="tesla tsla automotive">
+                            <div class="nlr-body">
+                                <p class="nlr-title">Tesla shares move lower after market report</p>
+                                <p class="nlr-desc">Investors react to mixed delivery numbers in Q2 report.</p>
+                                <p class="nlr-meta">Reuters <span class="nlr-sep">·</span> 4h ago</p>
+                            </div>
+                            <div class="nlr-thumb">
+                                <img class="nlr-thumb-img" alt="" src="https://cdn.simpleicons.org/tesla"
+                                     onload="this.style.display='block';this.nextElementSibling.style.display='none'"
+                                     onerror="this.style.display='none'">
+                                <div class="nlr-thumb-grad nlr-grad-red stock-logo-placeholder tesla" aria-hidden="true">T</div>
+                            </div>
+                        </article>
+
+                        <article class="news-list-row news-card-item" data-category="earnings" data-searchable data-title="Amazon gains after strong retail forecast" data-search-keywords="amazon amzn earnings retail">
+                            <div class="nlr-body">
+                                <p class="nlr-title">Amazon gains after strong retail forecast</p>
+                                <p class="nlr-desc">Company raises guidance as online sales continue to grow.</p>
+                                <p class="nlr-meta">Bloomberg <span class="nlr-sep">·</span> 5h ago</p>
+                            </div>
+                            <div class="nlr-thumb">
+                                <img class="nlr-thumb-img" alt="" src="https://cdn.simpleicons.org/amazon"
+                                     onload="this.style.display='block';this.nextElementSibling.style.display='none'"
+                                     onerror="this.style.display='none'">
+                                <div class="nlr-thumb-grad nlr-grad-green stock-logo-placeholder amazon" aria-hidden="true">A</div>
+                            </div>
+                        </article>
+
+                        <article class="news-list-row news-card-item" data-category="markets" data-searchable data-title="European markets open higher as inflation eases" data-search-keywords="european europe eu markets inflation">
+                            <div class="nlr-body">
+                                <p class="nlr-title">European markets open higher as inflation eases</p>
+                                <p class="nlr-desc">Markets in Europe show positive momentum this morning.</p>
+                                <p class="nlr-meta">CNBC <span class="nlr-sep">·</span> 6h ago</p>
+                            </div>
+                            <div class="nlr-thumb">
+                                <div class="nlr-thumb-grad nlr-grad-blue" aria-hidden="true">
+                                    <span class="nlr-fallback-text">EU</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="news-list-row news-card-item" data-category="technology" data-searchable data-title="NVIDIA hits new all-time high on AI chip demand" data-search-keywords="nvidia nvda nv ai chip">
+                            <div class="nlr-body">
+                                <p class="nlr-title">NVIDIA hits new all-time high on AI chip demand</p>
+                                <p class="nlr-desc">Strong demand for AI chips boosts NVIDIA stock to record levels.</p>
+                                <p class="nlr-meta">Yahoo Finance <span class="nlr-sep">·</span> 7h ago</p>
+                            </div>
+                            <div class="nlr-thumb">
+                                <img class="nlr-thumb-img" alt="" src="https://cdn.simpleicons.org/nvidia"
+                                     onload="this.style.display='block';this.nextElementSibling.style.display='none'"
+                                     onerror="this.style.display='none'">
+                                <div class="nlr-thumb-grad nlr-grad-teal stock-logo-placeholder nvidia" aria-hidden="true">NV</div>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+
+                <!-- Subscribe card -->
+                <div class="news-subscribe-card">
+                    <div class="nsc-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"/></svg>
+                    </div>
+                    <h3 class="nsc-title" data-i18n="subscribe.title">Stay Informed</h3>
+                    <p class="nsc-text" data-i18n="subscribe.text">Get the latest market news and updates delivered to your inbox.</p>
+                    <div class="nsc-form">
+                        <input type="email" class="nsc-input" id="newsSubscribeInput" data-i18n-placeholder="subscribe.placeholder" placeholder="your@email.com" aria-label="Email address">
+                        <button type="button" class="nsc-btn" id="newsSubscribeBtn" data-i18n="subscribe.btn">Subscribe</button>
+                        <p class="nsc-message" id="newsSubscribeMsg" aria-live="polite"></p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Empty state (hidden by default, shown when search has no results) -->
+        <div class="news-empty-state" id="newsEmptyState" style="display:none;" aria-live="polite">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <p id="newsEmptyMessage" data-i18n="empty.noResults">No results found.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="clarivo-footer">
+    <div class="container">
+        <div class="row gy-5 footer-grid">
+            <div class="col-lg-4 col-md-6">
+                <div class="footer-brand-block">
+                    <div class="footer-brand">
+                        <img src="assets/Logo.png" alt="Clarivo" class="footer-logo">
+                        <span class="footer-brand-name">Clarivo</span>
+                    </div>
+                    <p class="footer-desc">Smart market insights for everyday investors.</p>
+                </div>
+            </div>
+            <div class="col-lg col-md-6 col-6">
+                <p class="footer-col-title">Company</p>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="col-lg col-md-6 col-6">
+                <p class="footer-col-title">Support</p>
+                <ul class="footer-links">
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="col-lg col-md-6 col-6">
+                <p class="footer-col-title">Legal</p>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-social">
+            <a href="#" class="footer-social-btn" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="X">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+        </div>
+
+        <div class="footer-divider"></div>
+        <p class="footer-copy">&copy; 2026 Clarivo. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+<script src="config.example.js"></script>
+<script src="config.js"></script>
+<script src="stock-data-service.js"></script>
+<script src="libs/chart.min.js"></script>
+    <script src="api.js"></script>
+
+</body>
+</html>

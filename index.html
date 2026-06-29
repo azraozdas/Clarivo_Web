@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clarivo — Understand the Market</title>
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <!-- Google Fonts — Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <header>
+        <nav class="navbar navbar-expand-lg clarivo-navbar" id="mainNav">
+            <div class="container">
+
+                <!-- Brand -->
+                <a class="navbar-brand clarivo-brand" href="#">
+                    <img src="assets/Logo.png" alt="Clarivo" class="brand-logo">
+                    <span class="brand-text">Clarivo</span>
+                </a>
+
+                <!-- Mobile toggle -->
+                <button class="navbar-toggler clarivo-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarLinks"
+                        aria-controls="navbarLinks" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <!-- Nav links -->
+                <div class="collapse navbar-collapse" id="navbarLinks">
+                    <ul class="navbar-nav clarivo-nav-list">
+                        <li class="nav-item">
+                            <a class="nav-link active-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="market.html">Market</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="portfolio.html">Portfolio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="news.html">News</a>
+                        </li>
+                    </ul>
+
+                    <!-- Right-side actions: language → profile → upgrade -->
+                    <div class="nav-actions">
+                        <span class="nav-lang">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            EN
+                        </span>
+                        <a href="auth.html" class="nav-profile-btn" id="navProfileBtn" aria-label="Profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </a>
+                        <a href="pro.html" class="btn btn-clarivo-cta">Upgrade</a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10 text-center">
+
+                    <h1 class="hero-heading">
+                        Understand the market,<br>
+                        <span class="heading-accent">not just the numbers.</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Clarivo helps beginner investors follow market movement
+                        with a calm, clean, and easy-to-read dashboard.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="auth.html" class="btn btn-clarivo-primary">Get Started</a>
+                        <a href="#market" class="btn btn-clarivo-outline">View Market</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MARKET SUMMARY SECTION ===== -->
+    <section class="summary-section" id="summary">
+        <div class="container">
+
+            <div class="section-header text-center">
+                <h2 class="section-title">Market Summary</h2>
+                <p class="section-subtitle">A quick overview of today's major market movement.</p>
+            </div>
+
+            <div class="row g-4 align-items-stretch">
+
+                <!-- Market Summary card (left) -->
+                <div class="col-lg-7 col-12">
+                    <div class="market-summary-card">
+                        <div class="ms-header">
+                            <span class="ms-title">Market Summary</span>
+                            <span class="ms-live-badge">● Live</span>
+                        </div>
+                        <div class="ms-index-block">
+                            <p class="ms-index-name">S&amp;P 500</p>
+                            <p class="ms-index-ticker">SPX</p>
+                            <p class="ms-index-price">—</p>
+                            <p class="ms-index-change">Loading live market data…</p>
+                        </div>
+                        <div class="ms-chart-wrap">
+                            <canvas id="msSummaryChart" aria-label="S&amp;P 500 market summary chart"></canvas>
+                            <p class="ms-chart-unavailable" id="msChartUnavailable" style="display:none;">Chart unavailable</p>
+                        </div>
+                        <div class="ms-stats-divider"></div>
+                        <div class="ms-stats">
+                            <div class="ms-stat-row">
+                                <span class="ms-stat-label">Open</span>
+                                <span class="ms-stat-value">—</span>
+                            </div>
+                            <div class="ms-stat-row">
+                                <span class="ms-stat-label">High</span>
+                                <span class="ms-stat-value">—</span>
+                            </div>
+                            <div class="ms-stat-row">
+                                <span class="ms-stat-label">Low</span>
+                                <span class="ms-stat-value">—</span>
+                            </div>
+                            <div class="ms-stat-row">
+                                <span class="ms-stat-label">Volume</span>
+                                <span class="ms-stat-value">—</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Major Indices card (right) -->
+                <div class="col-lg-5 col-12">
+                    <div class="major-indices-card">
+                        <div class="mi-header">
+                            <span class="mi-title">Major Indices</span>
+                        </div>
+                        <div class="mi-list">
+
+                            <div class="mi-row">
+                                <div class="mi-left">
+                                    <span class="mi-icon mi-icon-nasdaq">N</span>
+                                    <div>
+                                        <p class="mi-name">Nasdaq 100</p>
+                                        <p class="mi-ticker">NDX</p>
+                                    </div>
+                                </div>
+                                <span class="mi-change positive">+2.48%</span>
+                            </div>
+
+                            <div class="mi-row">
+                                <div class="mi-left">
+                                    <span class="mi-icon mi-icon-japan">J</span>
+                                    <div>
+                                        <p class="mi-name">Japan 225</p>
+                                        <p class="mi-ticker">N225</p>
+                                    </div>
+                                </div>
+                                <span class="mi-change positive">+0.28%</span>
+                            </div>
+
+                            <div class="mi-row">
+                                <div class="mi-left">
+                                    <span class="mi-icon mi-icon-sse">S</span>
+                                    <div>
+                                        <p class="mi-name">SSE Composite</p>
+                                        <p class="mi-ticker">SSEC</p>
+                                    </div>
+                                </div>
+                                <span class="mi-change negative">-0.43%</span>
+                            </div>
+
+                            <div class="mi-row">
+                                <div class="mi-left">
+                                    <span class="mi-icon mi-icon-ftse">F</span>
+                                    <div>
+                                        <p class="mi-name">FTSE 100</p>
+                                        <p class="mi-ticker">FTSE</p>
+                                    </div>
+                                </div>
+                                <span class="mi-change negative">-0.35%</span>
+                            </div>
+
+                            <div class="mi-row">
+                                <div class="mi-left">
+                                    <span class="mi-icon mi-icon-dax">D</span>
+                                    <div>
+                                        <p class="mi-name">DAX</p>
+                                        <p class="mi-ticker">DAX</p>
+                                    </div>
+                                </div>
+                                <span class="mi-change negative">-0.16%</span>
+                            </div>
+
+                            <div class="mi-row">
+                                <div class="mi-left">
+                                    <span class="mi-icon mi-icon-cac">C</span>
+                                    <div>
+                                        <p class="mi-name">CAC 40</p>
+                                        <p class="mi-ticker">CAC</p>
+                                    </div>
+                                </div>
+                                <span class="mi-change negative">-0.55%</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MARKET SNAPSHOT ===== -->
+    <section class="market-section" id="market">
+        <div class="container">
+
+            <div class="section-header text-center">
+                <h2 class="section-title">Market Snapshot</h2>
+                <p class="section-subtitle">A quick look at today's most-watched stocks.</p>
+            </div>
+
+            <div class="market-carousel-wrapper">
+
+                <!-- Left arrow -->
+                <button class="carousel-arrow" id="arrowLeft" aria-label="Previous stocks">&#8592;</button>
+
+                <!-- Stock cards — rendered by script.js -->
+                <div class="row gy-4" id="stockCarousel"></div>
+
+                <!-- Right arrow -->
+                <button class="carousel-arrow" id="arrowRight" aria-label="Next stocks">&#8594;</button>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LATEST MARKET NEWS ===== -->
+    <section class="news-section" id="news">
+        <div class="container">
+
+            <div class="section-header text-center">
+                <h2 class="section-title">Latest Market News</h2>
+                <p class="section-subtitle">Stay updated with the latest market movements and important events.</p>
+            </div>
+
+            <div class="row gy-4">
+
+                <!-- News Card 1 — replaced with real headline by api.js once the news API responds -->
+                <div class="col-lg-4 col-md-6 col-12">
+                    <article class="news-card">
+                        <div class="news-card-meta">
+                            <span class="news-category">News</span>
+                            <span class="news-date">Loading…</span>
+                        </div>
+                        <h3 class="news-title">Loading live headlines…</h3>
+                        <div class="news-divider"></div>
+                        <p class="news-text">
+                            Fetching the latest market news…
+                        </p>
+                        <a href="#" class="news-link">Read more &rarr;</a>
+                    </article>
+                </div>
+
+                <!-- News Card 2 — replaced with real headline by api.js once the news API responds -->
+                <div class="col-lg-4 col-md-6 col-12">
+                    <article class="news-card">
+                        <div class="news-card-meta">
+                            <span class="news-category">News</span>
+                            <span class="news-date">Loading…</span>
+                        </div>
+                        <h3 class="news-title">Loading live headlines…</h3>
+                        <div class="news-divider"></div>
+                        <p class="news-text">
+                            Fetching the latest market news…
+                        </p>
+                        <a href="#" class="news-link">Read more &rarr;</a>
+                    </article>
+                </div>
+
+                <!-- News Card 3 — replaced with real headline by api.js once the news API responds -->
+                <div class="col-lg-4 col-md-6 col-12">
+                    <article class="news-card">
+                        <div class="news-card-meta">
+                            <span class="news-category">News</span>
+                            <span class="news-date">Loading…</span>
+                        </div>
+                        <h3 class="news-title">Loading live headlines…</h3>
+                        <div class="news-divider"></div>
+                        <p class="news-text">
+                            Fetching the latest market news…
+                        </p>
+                        <a href="#" class="news-link">Read more &rarr;</a>
+                    </article>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="clarivo-footer">
+        <div class="container">
+
+            <!-- Top grid: 4 columns -->
+            <div class="row gy-5 footer-grid">
+
+                <!-- Column 1: Brand -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand-block">
+                        <div class="footer-brand">
+                            <img src="assets/Logo.png" alt="Clarivo" class="footer-logo">
+                            <span class="footer-brand-name">Clarivo</span>
+                        </div>
+                        <p class="footer-desc">
+                            Smart market insights for everyday investors.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Column 2: Company -->
+                <div class="col-lg col-md-6 col-6">
+                    <p class="footer-col-title">Company</p>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Support -->
+                <div class="col-lg col-md-6 col-6">
+                    <p class="footer-col-title">Support</p>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Legal -->
+                <div class="col-lg col-md-6 col-6">
+                    <p class="footer-col-title">Legal</p>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Social icons -->
+            <div class="footer-social">
+                <!-- LinkedIn -->
+                <a href="#" class="footer-social-btn" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </a>
+                <!-- Instagram -->
+                <a href="#" class="footer-social-btn" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                </a>
+                <!-- X / Twitter -->
+                <a href="#" class="footer-social-btn" aria-label="X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <!-- GitHub -->
+                <a href="#" class="footer-social-btn" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Divider -->
+            <div class="footer-divider"></div>
+
+            <!-- Bottom copyright -->
+            <p class="footer-copy">&copy; 2026 Clarivo. All rights reserved.</p>
+
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="script.js"></script>
+    <script src="config.example.js"></script>
+    <script src="config.js"></script>
+    <script src="stock-data-service.js"></script>
+    <script src="libs/chart.min.js"></script>
+    <script src="api.js"></script>
+
+</body>
+</html>

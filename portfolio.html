@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clarivo — Portfolio</title>
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <!-- Google Fonts — Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <header>
+        <nav class="navbar navbar-expand-lg clarivo-navbar" id="mainNav">
+            <div class="container">
+
+                <!-- Brand -->
+                <a class="navbar-brand clarivo-brand" href="index.html">
+                    <img src="assets/Logo.png" alt="Clarivo" class="brand-logo">
+                    <span class="brand-text">Clarivo</span>
+                </a>
+
+                <!-- Mobile toggle -->
+                <button class="navbar-toggler clarivo-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarLinks"
+                        aria-controls="navbarLinks" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <!-- Nav links -->
+                <div class="collapse navbar-collapse" id="navbarLinks">
+                    <ul class="navbar-nav clarivo-nav-list">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="market.html">Market</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active-link" href="portfolio.html">Portfolio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="news.html">News</a>
+                        </li>
+                    </ul>
+
+                    <!-- Right-side actions -->
+                    <div class="nav-actions">
+                        <span class="nav-lang">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            EN
+                        </span>
+                        <a href="auth.html" class="nav-profile-btn" id="navProfileBtn" aria-label="Profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </a>
+                        <a href="pro.html" class="btn btn-clarivo-cta">Upgrade</a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="pf-hero-section">
+        <div class="container">
+            <div class="pf-hero-row">
+                <div>
+                    <h1 class="pf-hero-heading">Portfolio</h1>
+                    <p class="pf-hero-subtitle">Track your investments and portfolio performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="pf-content-section">
+        <div class="container">
+            <div class="row gy-4">
+
+                <!-- ===== TOTAL PORTFOLIO VALUE CARD ===== -->
+                <div class="col-12">
+                    <div class="pf-value-card">
+                        <div class="pf-value-card-top">
+
+                            <div class="pf-card-header">
+                                <span class="pf-card-label">Total Portfolio Value</span>
+                                <span class="pf-market-badge">
+                                    <span class="pf-market-dot" aria-hidden="true"></span>
+                                    Market is Open
+                                </span>
+                            </div>
+
+                            <p class="pf-portfolio-value">€0.00</p>
+                            <p class="pf-value-change">No portfolio data yet</p>
+
+                            <div class="pf-time-tabs" id="pfTimeTabs" role="group" aria-label="Time period">
+                                <button class="pf-time-tab" data-period="1D">1D</button>
+                                <button class="pf-time-tab active" data-period="1W">1W</button>
+                                <button class="pf-time-tab" data-period="1M">1M</button>
+                                <button class="pf-time-tab" data-period="3M">3M</button>
+                                <button class="pf-time-tab" data-period="1Y">1Y</button>
+                                <button class="pf-time-tab" data-period="ALL">ALL</button>
+                            </div>
+
+                            <div class="pf-chart-wrap">
+                                <canvas id="portfolioValueChart" aria-label="Portfolio value chart"></canvas>
+                                <p class="pf-chart-unavailable" id="pfChartUnavailable" style="display:none;">Chart unavailable</p>
+                            </div>
+
+                        </div>
+
+                        <div class="pf-bottom-stats">
+                            <div class="pf-stat-item">
+                                <p class="pf-stat-label">Invested</p>
+                                <p class="pf-stat-value">€0.00</p>
+                            </div>
+                            <div class="pf-stat-item">
+                                <p class="pf-stat-label">Daily Gain</p>
+                                <p class="pf-stat-value">€0.00</p>
+                            </div>
+                            <div class="pf-stat-item">
+                                <p class="pf-stat-label">Updated</p>
+                                <p class="pf-stat-value">Just now</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== YOUR HOLDINGS ===== -->
+                <div class="col-12">
+                    <div class="pf-section-card">
+                        <h2 class="pf-section-heading">Your Holdings</h2>
+
+                        <div id="pfHoldingsList">
+                            <!-- Populated by api.js from clarivo_holdings in LocalStorage -->
+                        </div>
+                        <p id="pfHoldingsEmpty" class="sd-news-time" style="display:none;">
+                            No holdings yet. Open a stock detail page and tap Buy shares to build your portfolio.
+                        </p>
+
+                    </div>
+                </div>
+
+                <!-- ===== PORTFOLIO ALLOCATION ===== -->
+                <div class="col-lg-6">
+                    <div class="pf-section-card h-100">
+                        <h2 class="pf-section-heading">Portfolio Allocation</h2>
+                        <div class="pf-alloc-inner">
+                            <div class="pf-donut-wrap">
+                                <canvas id="portfolioDonutChart" aria-label="Portfolio allocation donut chart"></canvas>
+                            </div>
+                            <ul class="pf-legend" role="list">
+                                <li class="pf-legend-item">
+                                    <span class="pf-legend-name">No allocation</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== RECENT ACTIVITY ===== -->
+                <div class="col-lg-6">
+                    <div class="pf-section-card h-100">
+                        <h2 class="pf-section-heading">Recent Activity</h2>
+
+                        <div id="pfActivityList">
+                            <!-- Populated by api.js from clarivo_activity in LocalStorage -->
+                        </div>
+                        <p id="pfActivityEmpty" class="sd-news-time" style="display:none;">
+                            No recent activity yet.
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="clarivo-footer">
+        <div class="container">
+
+            <div class="row gy-5 footer-grid">
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand-block">
+                        <div class="footer-brand">
+                            <img src="assets/Logo.png" alt="Clarivo" class="footer-logo">
+                            <span class="footer-brand-name">Clarivo</span>
+                        </div>
+                        <p class="footer-desc">Smart market insights for everyday investors.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg col-md-6 col-6">
+                    <p class="footer-col-title">Company</p>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg col-md-6 col-6">
+                    <p class="footer-col-title">Support</p>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg col-md-6 col-6">
+                    <p class="footer-col-title">Legal</p>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-social">
+                <a href="#" class="footer-social-btn" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="#" class="footer-social-btn" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="#" class="footer-social-btn" aria-label="X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="#" class="footer-social-btn" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                </a>
+            </div>
+
+            <div class="footer-divider"></div>
+            <p class="footer-copy">&copy; 2026 Clarivo. All rights reserved.</p>
+
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script src="config.example.js"></script>
+    <script src="config.js"></script>
+    <script src="stock-data-service.js"></script>
+    <script src="holdings.js"></script>
+    <script src="libs/chart.min.js"></script>
+    <script src="api.js"></script>
+
+</body>
+</html>

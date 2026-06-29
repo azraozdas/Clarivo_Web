@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clarivo — Market Overview</title>
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <!-- Google Fonts — Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header>
+    <nav class="navbar navbar-expand-lg clarivo-navbar" id="mainNav">
+        <div class="container">
+
+            <a class="navbar-brand clarivo-brand" href="index.html">
+                <img src="assets/Logo.png" alt="Clarivo" class="brand-logo">
+                <span class="brand-text">Clarivo</span>
+            </a>
+
+            <button class="navbar-toggler clarivo-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarLinks"
+                    aria-controls="navbarLinks" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarLinks">
+                <ul class="navbar-nav clarivo-nav-list">
+                    <li class="nav-item"><a class="nav-link" href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active-link" href="market.html" data-i18n="nav.market">Market</a></li>
+                    <li class="nav-item"><a class="nav-link" href="portfolio.html" data-i18n="nav.portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html" data-i18n="nav.news">News</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <div class="nav-lang-dropdown" id="navLangDropdown">
+                        <button class="nav-lang nav-lang-toggle" type="button" id="navLangToggle" aria-haspopup="listbox" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            <span id="navLangLabel">EN</span>
+                        </button>
+                        <ul class="nav-lang-menu" id="navLangMenu" role="listbox" aria-label="Select language">
+                            <li><button type="button" class="nav-lang-option active" data-lang="EN" role="option">EN</button></li>
+                            <li><button type="button" class="nav-lang-option" data-lang="TR" role="option">TR</button></li>
+                            <li><button type="button" class="nav-lang-option" data-lang="DE" role="option">DE</button></li>
+                        </ul>
+                    </div>
+                    <a href="auth.html" class="nav-profile-btn" id="navProfileBtn" data-i18n-aria="nav.profile" aria-label="Profile">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </a>
+                    <a href="pro.html" class="btn btn-clarivo-cta" data-i18n="nav.upgrade">Upgrade</a>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="mk-hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-lg-7 col-md-8">
+                <span class="mk-hero-eyebrow">
+                    <span class="mk-pulse-dot" aria-hidden="true"></span>
+                    <span data-i18n="hero.liveMarkets">Live Markets</span>
+                </span>
+                <h1 class="mk-hero-heading" data-i18n="hero.title">Market Overview</h1>
+                <p class="mk-hero-subtitle" data-i18n="hero.subtitle">Track global stocks, indices, currencies, and market movement in one place.</p>
+
+                <div class="mk-search-row">
+                    <div class="mk-search-wrap">
+                        <svg class="mk-search-icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input id="mkSearchInput" type="search" class="mk-search-input"
+                               data-i18n-placeholder="hero.searchPlaceholder"
+                               placeholder="Search stocks, indices, or currencies…"
+                               aria-label="Search stocks" autocomplete="off">
+                    </div>
+                    <button class="news-filter-btn" aria-label="Filter">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CSS Radar / Globe -->
+            <div class="col-lg-5 col-md-4 d-none d-md-flex justify-content-end" aria-hidden="true">
+                <div class="mk-radar-wrap">
+                    <div class="mk-radar">
+                        <div class="mk-radar-ring mk-rr-1"></div>
+                        <div class="mk-radar-ring mk-rr-2"></div>
+                        <div class="mk-radar-ring mk-rr-3"></div>
+                        <div class="mk-radar-sweep"></div>
+                        <div class="mk-radar-glow"></div>
+                        <div class="mk-radar-center"></div>
+                        <span class="mk-float-chip mfc-1">S&P +0.82%</span>
+                        <span class="mk-float-chip mfc-2">DAX +0.46%</span>
+                        <span class="mk-float-chip mfc-3">FTSE -0.22%</span>
+                        <span class="mk-float-chip mfc-4">NQ +1.14%</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== MARKET INDICES ===== -->
+<section class="mk-section" id="mkIndicesSection">
+    <div class="container">
+
+        <div class="mk-section-header">
+            <h2 class="mk-section-title" data-i18n="section.indices">Market Indices</h2>
+            <span class="ms-live-badge">
+                <span class="mk-pulse-dot" style="width:6px;height:6px;" aria-hidden="true"></span>
+                <span data-i18n="section.live">Live</span>
+            </span>
+        </div>
+
+        <div class="row gy-3" id="mkIndicesGrid">
+
+            <div class="col-lg-3 col-sm-6 col-12 mk-index-col" data-searchable data-search-text="s&p 500 sp500 usa">
+                <div class="mk-index-card">
+                    <div class="mk-idx-header">
+                        <div class="mk-idx-icon mk-idx-sp">
+                                <img src="https://flagcdn.com/w40/us.png" class="mk-idx-flag" alt="USA" onerror="this.style.display='none'">
+                            </div>
+                        <div>
+                            <p class="mk-idx-name">S&amp;P 500</p>
+                            <p class="mk-idx-region">USA</p>
+                        </div>
+                    </div>
+                    <div class="mk-idx-chart-wrap"><canvas class="mk-idx-chart" data-positive="true"></canvas></div>
+                    <div class="mk-idx-footer">
+                        <p class="mk-idx-value">5,487.03</p>
+                        <span class="mk-idx-change positive-badge">↑ +0.82%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-12 mk-index-col" data-searchable data-search-text="nasdaq nq usa tech">
+                <div class="mk-index-card">
+                    <div class="mk-idx-header">
+                        <div class="mk-idx-icon mk-idx-nq">
+                                <img src="https://flagcdn.com/w40/us.png" class="mk-idx-flag" alt="USA" onerror="this.style.display='none'">
+                            </div>
+                        <div>
+                            <p class="mk-idx-name">NASDAQ</p>
+                            <p class="mk-idx-region">USA</p>
+                        </div>
+                    </div>
+                    <div class="mk-idx-chart-wrap"><canvas class="mk-idx-chart" data-positive="true"></canvas></div>
+                    <div class="mk-idx-footer">
+                        <p class="mk-idx-value">17,689.36</p>
+                        <span class="mk-idx-change positive-badge">↑ +1.14%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-12 mk-index-col" data-searchable data-search-text="dax germany europe">
+                <div class="mk-index-card">
+                    <div class="mk-idx-header">
+                        <div class="mk-idx-icon mk-idx-dax">
+                                <img src="https://flagcdn.com/w40/de.png" class="mk-idx-flag" alt="Germany" onerror="this.style.display='none'">
+                            </div>
+                        <div>
+                            <p class="mk-idx-name">DAX</p>
+                            <p class="mk-idx-region">Germany</p>
+                        </div>
+                    </div>
+                    <div class="mk-idx-chart-wrap"><canvas class="mk-idx-chart" data-positive="true"></canvas></div>
+                    <div class="mk-idx-footer">
+                        <p class="mk-idx-value">18,245.20</p>
+                        <span class="mk-idx-change positive-badge">↑ +0.46%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-12 mk-index-col" data-searchable data-search-text="ftse 100 uk britain london">
+                <div class="mk-index-card">
+                    <div class="mk-idx-header">
+                        <div class="mk-idx-icon mk-idx-ftse">
+                                <img src="https://flagcdn.com/w40/gb.png" class="mk-idx-flag" alt="UK" onerror="this.style.display='none'">
+                            </div>
+                        <div>
+                            <p class="mk-idx-name">FTSE 100</p>
+                            <p class="mk-idx-region">UK</p>
+                        </div>
+                    </div>
+                    <div class="mk-idx-chart-wrap"><canvas class="mk-idx-chart" data-positive="false"></canvas></div>
+                    <div class="mk-idx-footer">
+                        <p class="mk-idx-value">8,182.50</p>
+                        <span class="mk-idx-change negative-badge">↓ -0.22%</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Index empty state -->
+        <p class="mk-empty-state" id="mkIndicesEmpty" style="display:none;" data-i18n="empty.indices">No indices match your search.</p>
+
+        <!-- Chart.js: Daily % change for all indices -->
+        <div class="pf-section-card mt-4" id="mkOverviewChartCard">
+            <div class="mk-section-header mb-3">
+                <h2 class="mk-section-title">Daily Change Overview</h2>
+                <span class="ms-live-badge">
+                    <span class="mk-pulse-dot" style="width:6px;height:6px;" aria-hidden="true"></span>
+                    <span>Live</span>
+                </span>
+            </div>
+            <div style="position:relative;height:180px;">
+                <canvas id="mkOverviewChart" aria-label="Market index daily change chart"></canvas>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===== MAIN GRID: Top Stocks + Sidebar ===== -->
+<section class="mk-section mk-section-grid">
+    <div class="container">
+        <div class="row gy-4">
+
+            <!-- LEFT: Top Stocks -->
+            <div class="col-lg-8">
+                <div class="pf-section-card">
+                    <div class="mk-stocks-header">
+                        <h2 class="pf-section-heading mb-0" data-i18n="section.topStocks">Top Stocks</h2>
+                    </div>
+
+                    <div id="mkStocksTable">
+
+                        <!-- Row: AAPL -->
+                        <a class="mk-stock-row" href="stock-detail.html?ticker=AAPL" data-searchable data-search-text="apple aapl apple inc technology">
+                            <div class="mk-stock-logo-slot">
+                                <img class="mk-stock-logo" alt="Apple Inc." src="assets/apple_logo.png"
+                                     onload="this.style.display='block';this.nextElementSibling.style.display='none'"
+                                     onerror="this.style.display='none'">
+                                <div class="mk-stock-fallback stock-logo-placeholder apple" aria-hidden="true">A</div>
+                            </div>
+                            <div class="mk-stock-info">
+                                <p class="mk-stock-name">Apple Inc.</p>
+                                <p class="mk-stock-ticker">AAPL</p>
+                            </div>
+                            <div class="mk-stock-chart-wrap" aria-hidden="true">
+                                <canvas class="mk-stock-spark" data-positive="true"></canvas>
+                            </div>
+                            <div class="mk-stock-price-col">
+                                <p class="mk-stock-price">—</p>
+                                <span class="mk-stock-change positive-badge">Loading…</span>
+                            </div>
+                        </a>
+
+                        <!-- Row: TSLA -->
+                        <a class="mk-stock-row" href="stock-detail.html?ticker=TSLA" data-searchable data-search-text="tesla tsla automotive electric">
+                            <div class="mk-stock-logo-slot">
+                                <img class="mk-stock-logo" alt="Tesla, Inc." src="assets/tesla_logo.png"
+                                     onload="this.style.display='block';this.nextElementSibling.style.display='none'"
+                                     onerror="this.style.display='none'">
+                                <div class="mk-stock-fallback stock-logo-placeholder tesla" aria-hidden="true">T</div>
+                            </div>
+                            <div class="mk-stock-info">
+                                <p class="mk-stock-name">Tesla, Inc.</p>
+                                <p class="mk-stock-ticker">TSLA</p>
+                            </div>
+                            <div class="mk-stock-chart-wrap" aria-hidden="true">
+                                <canvas class="mk-stock-spark" data-positive="false"></canvas>
+                            </div>
+                            <div class="mk-stock-price-col">
+                                <p class="mk-stock-price">—</p>
+                                <span class="mk-stock-change negative-badge">Loading…</span>
+                            </div>
+                        </a>
+
+                        <!-- Row: AMZN -->
+                        <a class="mk-stock-row" href="stock-detail.html?ticker=AMZN" data-searchable data-search-text="amazon amzn retail ecommerce">
+                            <div class="mk-stock-logo-slot">
+                                <img class="mk-stock-logo" alt="Amazon.com" src="assets/amazon_logo.png"
+                                     onload="this.style.display='block';this.nextElementSibling.style.display='none'"
+                                     onerror="this.style.display='none'">
+                                <div class="mk-stock-fallback stock-logo-placeholder amazon" aria-hidden="true">A</div>
+                            </div>
+                            <div class="mk-stock-info">
+                                <p class="mk-stock-name">Amazon.com</p>
+                                <p class="mk-stock-ticker">AMZN</p>
+                            </div>
+                            <div class="mk-stock-chart-wrap" aria-hidden="true">
+                                <canvas class="mk-stock-spark" data-positive="true"></canvas>
+                            </div>
+                            <div class="mk-stock-price-col">
+                                <p class="mk-stock-price">—</p>
+                                <span class="mk-stock-change positive-badge">Loading…</span>
+                            </div>
+                        </a>
+
+                        <!-- Row: MSFT -->
+                        <a class="mk-stock-row" href="stock-detail.html?ticker=MSFT" data-searchable data-search-text="microsoft msft software cloud">
+                            <div class="mk-stock-logo-slot">
+                                <img class="mk-stock-logo" alt="Microsoft" src="https://cdn.simpleicons.org/microsoft"
+                                     onload="this.style.display='block';this.nextElementSibling.style.display='none'"
+                                     onerror="this.style.display='none'">
+                                <div class="mk-stock-fallback stock-logo-placeholder microsoft" aria-hidden="true">MS</div>
+                            </div>
+                            <div class="mk-stock-info">
+                                <p class="mk-stock-name">Microsoft</p>
+                                <p class="mk-stock-ticker">MSFT</p>
+                            </div>
+                            <div class="mk-stock-chart-wrap" aria-hidden="true">
+                                <canvas class="mk-stock-spark" data-positive="true"></canvas>
+                            </div>
+                            <div class="mk-stock-price-col">
+                                <p class="mk-stock-price">€378.85</p>
+                                <span class="mk-stock-change positive-badge">↑ +0.74%</span>
+                            </div>
+                        </a>
+
+                        <!-- Row: NVDA -->
+                        <a class="mk-stock-row" href="stock-detail.html?ticker=NVDA" data-searchable data-search-text="nvidia nvda ai chips semiconductors">
+                            <div class="mk-stock-logo-slot">
+                                <img class="mk-stock-logo" alt="NVIDIA" src="https://cdn.simpleicons.org/nvidia"
+                                     onload="this.style.display='block';this.nextElementSibling.style.display='none'"
+                                     onerror="this.style.display='none'">
+                                <div class="mk-stock-fallback stock-logo-placeholder nvidia" aria-hidden="true">NV</div>
+                            </div>
+                            <div class="mk-stock-info">
+                                <p class="mk-stock-name">NVIDIA</p>
+                                <p class="mk-stock-ticker">NVDA</p>
+                            </div>
+                            <div class="mk-stock-chart-wrap" aria-hidden="true">
+                                <canvas class="mk-stock-spark" data-positive="true"></canvas>
+                            </div>
+                            <div class="mk-stock-price-col">
+                                <p class="mk-stock-price">€903.12</p>
+                                <span class="mk-stock-change positive-badge">↑ +1.35%</span>
+                            </div>
+                        </a>
+
+                    </div>
+
+                    <p class="mk-empty-state" id="mkStocksEmpty" style="display:none;" data-i18n="empty.stocks">No stocks match your search.</p>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDEBAR -->
+            <div class="col-lg-4">
+
+                <!-- Currency Converter -->
+                <div class="pf-section-card mb-4">
+                    <h2 class="pf-section-heading" data-i18n="section.converter">Currency Converter</h2>
+
+                    <div class="mk-conv-row">
+                        <label class="mk-conv-label" for="mkConvAmount" data-i18n="conv.amount">Amount</label>
+                        <input id="mkConvAmount" type="number" class="mk-conv-input" value="1" min="0" step="any">
+                    </div>
+
+                    <div class="mk-conv-row">
+                        <label class="mk-conv-label" for="mkConvFrom" data-i18n="conv.from">From</label>
+                        <select id="mkConvFrom" class="mk-conv-select">
+                            <option value="EUR" selected>EUR — Euro</option>
+                            <option value="USD">USD — US Dollar</option>
+                            <option value="TRY">TRY — Turkish Lira</option>
+                            <option value="GBP">GBP — British Pound</option>
+                            <option value="JPY">JPY — Japanese Yen</option>
+                            <option value="CHF">CHF — Swiss Franc</option>
+                            <option value="CNY">CNY — Chinese Yuan</option>
+                            <option value="CAD">CAD — Canadian Dollar</option>
+                            <option value="AUD">AUD — Australian Dollar</option>
+                        </select>
+                    </div>
+
+                    <button class="mk-conv-swap-btn" id="mkConvSwap" data-i18n-aria="conv.swap" aria-label="Swap currencies">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+                    </button>
+
+                    <div class="mk-conv-row">
+                        <label class="mk-conv-label" for="mkConvTo" data-i18n="conv.to">To</label>
+                        <select id="mkConvTo" class="mk-conv-select">
+                            <option value="EUR">EUR — Euro</option>
+                            <option value="USD" selected>USD — US Dollar</option>
+                            <option value="TRY">TRY — Turkish Lira</option>
+                            <option value="GBP">GBP — British Pound</option>
+                            <option value="JPY">JPY — Japanese Yen</option>
+                            <option value="CHF">CHF — Swiss Franc</option>
+                            <option value="CNY">CNY — Chinese Yuan</option>
+                            <option value="CAD">CAD — Canadian Dollar</option>
+                            <option value="AUD">AUD — Australian Dollar</option>
+                        </select>
+                    </div>
+
+                    <button class="mk-conv-btn" id="mkConvBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                        <span data-i18n="conv.convert">Convert</span>
+                    </button>
+
+                    <div class="mk-conv-result" id="mkConvResult" style="display:none;" aria-live="polite">
+                        <p class="mk-conv-result-value" id="mkConvResultValue"></p>
+                    </div>
+
+                    <p class="mk-conv-note" data-i18n="conv.ratesNote">Live exchange rates will be connected later.</p>
+                </div>
+
+                <!-- Country Market Search -->
+                <div class="pf-section-card mb-4">
+                    <h2 class="pf-section-heading" data-i18n="section.countrySearch">Country Market Search</h2>
+
+                    <select id="mkCountrySelect" class="mk-conv-select mb-3">
+                        <option value="" data-i18n="country.select">Select a country…</option>
+                        <option value="germany" data-i18n="country.germany">Germany</option>
+                        <option value="usa" data-i18n="country.usa">USA</option>
+                        <option value="turkey" data-i18n="country.turkey">Turkey</option>
+                        <option value="uk" data-i18n="country.uk">UK</option>
+                    </select>
+
+                    <div id="mkCountryResult" style="display:none;">
+                        <div class="mk-country-card">
+                            <div class="mk-country-flag-row">
+                                <span class="mk-country-flag" id="mkCountryFlag"></span>
+                                <p class="mk-country-name" id="mkCountryName"></p>
+                            </div>
+                            <ul class="mk-country-items" id="mkCountryItems"></ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== TRENDING NEWS MINI ===== -->
+<section class="mk-section">
+    <div class="container">
+        <h2 class="mk-section-title mb-4" data-i18n="section.trendingNews">Trending News</h2>
+        <div class="row gy-3 mk-trending-news-row align-items-start">
+
+            <div class="col-lg-4 col-md-6 col-12">
+                <article class="mk-news-mini-card">
+                    <div class="mk-nmcard-img" aria-hidden="true"></div>
+                    <div class="mk-nmcard-glow mk-nmg-blue" aria-hidden="true"></div>
+                    <div class="mk-nmcard-body">
+                        <span class="news-badge-featured" style="background:linear-gradient(135deg,#635BFF,#4B44E8);" data-i18n="news.badgeMarkets">Markets</span>
+                        <h3 class="mk-nmcard-title">Loading live headlines…</h3>
+                        <p class="mk-nmcard-desc">Fetching the latest market news…</p>
+                        <p class="mk-nmcard-meta"></p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-12">
+                <article class="mk-news-mini-card">
+                    <div class="mk-nmcard-img" aria-hidden="true"></div>
+                    <div class="mk-nmcard-glow mk-nmg-green" aria-hidden="true"></div>
+                    <div class="mk-nmcard-body">
+                        <span class="news-badge-featured" style="background:linear-gradient(135deg,#1A6A40,#42D6B5);color:#030D1C;" data-i18n="news.badgeEurope">Europe</span>
+                        <h3 class="mk-nmcard-title">Loading live headlines…</h3>
+                        <p class="mk-nmcard-desc">Fetching the latest market news…</p>
+                        <p class="mk-nmcard-meta"></p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-12">
+                <article class="mk-news-mini-card">
+                    <div class="mk-nmcard-img" aria-hidden="true"></div>
+                    <div class="mk-nmcard-glow mk-nmg-orange" aria-hidden="true"></div>
+                    <div class="mk-nmcard-body">
+                        <span class="news-badge-featured" style="background:linear-gradient(135deg,#7A2A00,#E08840);" data-i18n="news.badgeCommodities">Commodities</span>
+                        <h3 class="mk-nmcard-title">Loading live headlines…</h3>
+                        <p class="mk-nmcard-desc">Fetching the latest market news…</p>
+                        <p class="mk-nmcard-meta"></p>
+                    </div>
+                </article>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="clarivo-footer">
+    <div class="container">
+        <div class="row gy-5 footer-grid">
+            <div class="col-lg-4 col-md-6">
+                <div class="footer-brand-block">
+                    <div class="footer-brand">
+                        <img src="assets/Logo.png" alt="Clarivo" class="footer-logo">
+                        <span class="footer-brand-name">Clarivo</span>
+                    </div>
+                    <p class="footer-desc">Smart market insights for everyday investors.</p>
+                </div>
+            </div>
+            <div class="col-lg col-md-6 col-6">
+                <p class="footer-col-title">Company</p>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="col-lg col-md-6 col-6">
+                <p class="footer-col-title">Support</p>
+                <ul class="footer-links">
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="col-lg col-md-6 col-6">
+                <p class="footer-col-title">Legal</p>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-social">
+            <a href="#" class="footer-social-btn" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="X">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+        </div>
+
+        <div class="footer-divider"></div>
+        <p class="footer-copy">&copy; 2026 Clarivo. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+<script src="config.example.js"></script>
+<script src="config.js"></script>
+<script src="stock-data-service.js"></script>
+<script src="libs/chart.min.js"></script>
+    <script src="api.js"></script>
+
+</body>
+</html>
