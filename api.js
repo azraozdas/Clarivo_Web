@@ -7,7 +7,7 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
 
     var _defaults = {
         AV_KEY:      'K5DXU7FSAF10A7GH',
-        TD_KEY:      'cb32e6e8ea284d7bb69631d43940ce56',
+        TD_KEY:      '4de42b6c86634df08c4082e774e43686',
         MX_KEY:      'm9oEfV3SlFmetmID2aPD1cc0DcFE95aUvV37YQFh',
         NA_KEY:      'b79110e0372a45f792d34b04f15c7167'
     };
