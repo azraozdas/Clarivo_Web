@@ -982,7 +982,6 @@ function initNewsSubscribe() {
 
 /* --- Bootstrap the news page --- */
 if (document.querySelector('.news-snapshot-section')) {
-    initLanguageDropdown();
     initNewsChips();
     initNewsSearch();
     initNewsSubscribe();
@@ -1326,8 +1325,6 @@ function initMkCountry() {
 
 /* --- Bootstrap market page --- */
 if (document.getElementById('mkIndicesGrid')) {
-    initLanguageDropdown();
-
     window.addEventListener('load', function () {
         requestAnimationFrame(function () {
             initMkCharts();
@@ -1343,3 +1340,6 @@ if (document.getElementById('mkIndicesGrid')) {
     initMkConverter();
     initMkCountry();
 }
+
+/* --- Language dropdown: wire up on any page that has the markup --- */
+initLanguageDropdown();

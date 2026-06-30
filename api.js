@@ -486,6 +486,27 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
         });
     }
 
+    // News page only — separate cache key from newsAll()/na_news_v2 so this
+    // does not affect Home/Market/Stock Detail's news widgets. Adds
+    // country=us: NewsAPI's top-headlines returns very few business articles
+    // without a country filter, which was starving the News page's
+    // "More News" grid (needs 12 articles: 1 featured + 5 sidebar + 6 grid).
+    function newsAllPage(cb) {
+        naFetch('country=us&category=business&pageSize=20', 'na_news_page_v2', function (e, arts) {
+            if (!e && arts && arts.length) { cb(null, arts); return; }
+            mxFetch('', 'mx_news_page_v2', function (e2, arts2) {
+                if (!e2 && arts2 && arts2.length) { cb(null, arts2); return; }
+                var stale = lsNewsGetStale('na_news_page_v2') || lsNewsGetStale('mx_news_page_v2');
+                if (stale && stale.length) {
+                    console.log('[Clarivo News] NewsAPI failed, using stale cache');
+                    cb(null, stale);
+                    return;
+                }
+                cb(e2 || e, null);
+            });
+        });
+    }
+
     // Company-specific: NewsAPI q= → Marketaux symbols=. Finnhub company-news
     // fallback removed — if both fail, cb reports the failure honestly.
     function newsForSymbol(sym, from, to, cb) {
@@ -1926,11 +1947,17 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
         // ── More News grid — rebuilt from live API ─────────────
         var grid = document.getElementById('moreNewsGrid');
         if (grid && articles.length > 1) {
-            var moreArts = articles.slice(1, 5);
+            var moreArts = articles.slice(6, 12);
+            if (moreArts.length < 6) {
+                // Fewer than 6 articles available at index 6+ (API returned a short
+                // list even with pageSize=20). Fill from article[1] onward so the
+                // section is never sparse — still 100% real fetched articles, no fakes.
+                moreArts = articles.slice(1, 7);
+            }
             grid.innerHTML = '';
             moreArts.forEach(function (art) {
                 var col = document.createElement('div');
-                col.className = 'col-sm-6 col-12';
+                col.className = 'col-lg-4 col-sm-6 col-12';
 
                 var article = document.createElement('article');
                 article.className = 'news-more-card news-card-item';
@@ -1970,7 +1997,7 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
 
         // ── News list rows ──────────────────────────────────────
         var rows = document.querySelectorAll('#newsListRows .news-list-row');
-        articles.slice(5, 5 + rows.length).forEach(function (art, i) {
+        articles.slice(1, 1 + rows.length).forEach(function (art, i) {
             var row = rows[i]; if (!row) return;
             var t     = row.querySelector('.nlr-title');
             var d     = row.querySelector('.nlr-desc');
@@ -2025,7 +2052,7 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
                 NS_SYMS.forEach(function (sym) {
                     q(sym, function (e, d) { var nd = normalizeQuote(d); if (!e && nd) nsUpdateCard(sym, nd); });
                 });
-                newsAll(function (e, a) { if (!e && a && a.length) nsUpdateArticles(a); });
+                newsAllPage(function (e, a) { if (!e && a && a.length) nsUpdateArticles(a); });
             });
         }
         refresh();
