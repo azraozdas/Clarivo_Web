@@ -1,0 +1,16 @@
+config.js
+
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+.claude/
+.cursor/
+.windsurf/
+.continue/
+*.prompt
+prompt_history/
+assistant_notes/
+smoke_run.log
+smoke_run_err.log
