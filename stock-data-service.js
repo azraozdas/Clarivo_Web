@@ -192,6 +192,14 @@
         } catch (_) {}
     }
 
+    // ── Tier 4 — absolute last resort (per teacher guidance) ───────────────────
+    // Used ONLY when live Twelve Data AND Alpha Vantage AND every cache layer
+    // have all failed for this symbol — see fallback-data.js. Never persisted
+    // to localStorage (so a later page load always tries the real APIs again).
+    function fallbackHistory(sym) {
+        return (window.CLARIVO_FALLBACK && window.CLARIVO_FALLBACK.history[sym]) || null;
+    }
+
     // ── Alpha Vantage — parse TIME_SERIES_DAILY_ADJUSTED ──────────────────────
     function avParse(json, sym) {
         var ts = json['Time Series (Daily)'];
@@ -251,8 +259,10 @@
 
         console.log('[Clarivo AV] Fetching', sym,
             '(batch slot ' + _avBatchCount + '/' + AV_CONCURRENT + ') ...');
-        fetch(url)
-            .then(function (r) { return r.json(); })
+        var ctrl  = typeof AbortController !== 'undefined' ? new AbortController() : null;
+        var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 5000) : null;
+        fetch(url, ctrl ? { signal: ctrl.signal } : {})
+            .then(function (r) { if (timer) clearTimeout(timer); return r.json(); })
             .then(function (json) {
                 var rows = avParse(json, sym);
                 if (!rows) throw new Error('No series for ' + sym);
@@ -267,6 +277,7 @@
                 cbs.forEach(function (c2) { c2(null, result); });
             })
             .catch(function (err) {
+                if (timer) clearTimeout(timer);
                 console.error('[Clarivo AV] Error', sym + ':', err.message || err);
                 var stale = lsGetStale(sym);
                 if (stale && stale.candles && stale.candles.length >= 2) {
@@ -274,7 +285,14 @@
                     _mem[sym] = stale; _stale[sym] = true;
                     cbs.forEach(function (c2) { c2(null, stale); });
                 } else {
-                    cbs.forEach(function (c2) { c2(err, null); });
+                    var fb = fallbackHistory(sym);
+                    if (fb) {
+                        console.warn('[Clarivo StockData] symbol=' + sym + ' source=fallback (TD + AV + cache all failed)');
+                        _mem[sym] = fb;
+                        cbs.forEach(function (c2) { c2(null, fb); });
+                    } else {
+                        cbs.forEach(function (c2) { c2(err, null); });
+                    }
                 }
             })
             .then(function () { _avInFlight--; avDrain(); });
@@ -366,7 +384,7 @@
 
         console.log('[Clarivo TD] Fetching', sym, '(slot ' + _tdBatchCount + '/' + TD_CONCURRENT + ')');
         var ctrl  = typeof AbortController !== 'undefined' ? new AbortController() : null;
-        var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 8000) : null;
+        var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 5000) : null;
         fetch(url, ctrl ? { signal: ctrl.signal } : {})
             .then(function (r) { if (timer) clearTimeout(timer); return r.json(); })
             .then(function (json) {

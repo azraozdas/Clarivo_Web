@@ -14,25 +14,18 @@
         return { AAPL: 0, TSLA: 0, AMZN: 0 };
     }
 
-    // Small predefined demo setup so the chart/holdings aren't empty on first
-    // launch. Share counts only — no fake prices, no fake chart data.
-    function seedDefaultHoldings() {
-        return { AAPL: 2, TSLA: 1, AMZN: 1 };
-    }
-
     function getHoldings() {
         try {
             var raw = localStorage.getItem(LS_KEY);
 
-            // Key truly missing (never created before) — seed once and persist
-            // immediately, so every later call (including this same check)
-            // sees the key as already existing and never reseeds. Selling
-            // everything back to 0 writes a real "{AAPL:0,...}" string, which
-            // is not null, so it is never mistaken for "missing" again.
+            // Key truly missing (never visited before) — write zeros and persist
+            // immediately so every subsequent call sees the key as existing and
+            // never re-initialises. Selling down to 0 writes "{AAPL:0,...}",
+            // which is not null, so it is never confused with "missing".
             if (raw === null) {
-                var seeded = setHoldings(seedDefaultHoldings());
-                console.log('[Clarivo Holdings] no holdings found — seeded initial demo portfolio (one-time)', seeded);
-                return seeded;
+                var zero = setHoldings(defaults());
+                console.log('[Clarivo Holdings] first launch — starting with 0 shares', zero);
+                return zero;
             }
 
             var h = JSON.parse(raw) || {};

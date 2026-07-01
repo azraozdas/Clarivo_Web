@@ -7,7 +7,7 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
 
     var _defaults = {
         AV_KEY:      'K5DXU7FSAF10A7GH',
-        TD_KEY:      '4de42b6c86634df08c4082e774e43686',
+        TD_KEY:      'b5c39007cf134a2c962d8d091d62a22f',
         MX_KEY:      'm9oEfV3SlFmetmID2aPD1cc0DcFE95aUvV37YQFh',
         NA_KEY:      'b79110e0372a45f792d34b04f15c7167'
     };
@@ -198,6 +198,14 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
         return memGet(key, Infinity) || lsGet(key, Infinity);
     }
 
+    // ── Tier 4 — absolute last resort (per teacher guidance) ─────────────────
+    // Generalizes the pattern that used to be a Home-only special case
+    // (MS_LAST_RESORT below) to every quote in the app. See fallback-data.js.
+    function fallbackQuote(sym) {
+        var d = window.CLARIVO_FALLBACK && window.CLARIVO_FALLBACK.quotes[sym];
+        return d ? { c: d.c, pc: d.pc, dp: d.dp, o: d.o, h: d.h, l: d.l, v: d.v, source: 'fallback' } : null;
+    }
+
     // ── Twelve Data quote — sole live-quote provider ─────────────────────
     // Twelve Data's free tier allows 8 req/min, shared with the history
     // fetcher in stock-data-service.js. Quote calls are queued here so a
@@ -219,7 +227,7 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
         var url      = 'https://api.twelvedata.com/quote?symbol=' + encodeURIComponent(sym)
             + '&apikey=' + encodeURIComponent(tdKey);
         var ctrl  = typeof AbortController !== 'undefined' ? new AbortController() : null;
-        var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 8000) : null;
+        var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 5000) : null;
         fetch(url, ctrl ? { signal: ctrl.signal } : {})
             .then(function (r) { if (timer) clearTimeout(timer); return r.json(); })
             .then(function (d) {
@@ -237,7 +245,8 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
                     o:  parseFloat(d.open)  || 0,
                     h:  parseFloat(d.high)  || 0,
                     l:  parseFloat(d.low)   || 0,
-                    v:  parseFloat(String(d.volume).replace(/,/g, '')) || 0
+                    v:  parseFloat(String(d.volume).replace(/,/g, '')) || 0,
+                    source: 'live'
                 };
                 toCache(cacheKey, norm);
                 cb(null, norm);
@@ -299,7 +308,7 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
     function q(sym, cb) {
         var cacheKey = 'q_' + sym;
         var hit = fromCache(cacheKey, TTL.q);
-        if (hit && hit.c > 0) { cb(null, hit); return; }
+        if (hit && hit.c > 0) { hit.source = 'cache'; cb(null, hit); return; }
         tdQuote(sym, function (e, d) {
             if (!e && d) { cb(null, d); return; }
             // Live fetch failed (API limit / CORS / network) — fall back to
@@ -307,7 +316,15 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
             var stale = staleCache(cacheKey);
             if (stale && stale.c > 0) {
                 console.log('[Clarivo API] quote fetch failed for', sym, '— using stale cache', e && e.message);
+                stale.source = 'cache';
                 cb(null, stale);
+                return;
+            }
+            // Live fetch AND stale cache both failed — absolute last resort.
+            var fb = fallbackQuote(sym);
+            if (fb) {
+                console.warn('[Clarivo API] quote fetch failed for', sym, '— using fallback data', e && e.message);
+                cb(null, fb);
                 return;
             }
             cb(e, null);
@@ -466,8 +483,12 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
             });
     }
 
-    // Priority chain: NewsAPI → Marketaux. Finnhub news fallback removed —
-    // if both fail, cb reports the failure honestly (no fake fallback).
+    // Tier 4 — absolute last resort (per teacher guidance). See fallback-data.js.
+    function fallbackNews() {
+        return (window.CLARIVO_FALLBACK && window.CLARIVO_FALLBACK.news) || [];
+    }
+
+    // Priority chain: NewsAPI → Marketaux → stale cache → fallback data.
     function newsAll(cb) {
         naFetch('category=business&language=en&pageSize=12', 'na_news_v2', function (e, arts) {
             if (!e && arts && arts.length) { cb(null, arts); return; }
@@ -479,6 +500,12 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
                 if (stale && stale.length) {
                     console.log('[Clarivo News] NewsAPI failed, using stale cache');
                     cb(null, stale);
+                    return;
+                }
+                var fb = fallbackNews();
+                if (fb.length) {
+                    console.warn('[Clarivo News] NewsAPI + Marketaux + cache all failed — using fallback data');
+                    cb(null, fb);
                     return;
                 }
                 cb(e2 || e, null);
@@ -502,6 +529,12 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
                     cb(null, stale);
                     return;
                 }
+                var fb = fallbackNews();
+                if (fb.length) {
+                    console.warn('[Clarivo News] NewsAPI + Marketaux + cache all failed — using fallback data');
+                    cb(null, fb);
+                    return;
+                }
                 cb(e2 || e, null);
             });
         });
@@ -519,6 +552,12 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
                 if (stale && stale.length) {
                     console.log('[Clarivo News] NewsAPI failed, using stale cache for', sym);
                     cb(null, stale);
+                    return;
+                }
+                var fb = fallbackNews();
+                if (fb.length) {
+                    console.warn('[Clarivo News] NewsAPI + Marketaux + cache all failed for', sym, '— using fallback data');
+                    cb(null, fb);
                     return;
                 }
                 cb(e2 || e, null);
@@ -926,11 +965,19 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
         });
     }
 
+    // Label rule (per teacher guidance): never call fallback data "Live".
+    var SOURCE_LABEL = { live: '● Live', cache: '● Cached data', fallback: '● Fallback data' };
+    function homeUpdateLiveBadge(source) {
+        var badge = document.querySelector('.ms-live-badge');
+        if (badge) badge.textContent = SOURCE_LABEL[source] || SOURCE_LABEL.live;
+    }
+
     function homeUpdateSummary(data) {
         // SPY as S&P proxy — multiply ×10 to approximate S&P 500 level
         var level  = data.c * 10;
         var price  = document.querySelector('.ms-index-price');
         var change = document.querySelector('.ms-index-change');
+        homeUpdateLiveBadge(data.source);
         if (price)  price.textContent  = level.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         if (change) {
             change.textContent = fChg(data.dp);
