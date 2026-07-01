@@ -111,6 +111,15 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
             : { line: '#E66A73', fill: 'rgba(230,106,115,0.15)' };
     }
 
+    // Maps a displayed changePercent (e.g. quote.dp) to chartPalette's tri-state
+    // positive flag, so a chart's color always matches the % text next to it
+    // instead of being recomputed from the chart's own first/last data point.
+    function trendPositiveFromChange(changePercent) {
+        var v = Number(changePercent);
+        if (!Number.isFinite(v) || v === 0) return null;
+        return v > 0;
+    }
+
     // ── Block ALL random chart data in script.js ────────
     // script.js uses Math.random() in four functions. We override every one
     // synchronously here — api.js loads after script.js so all window.*
@@ -846,6 +855,20 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
     var MS_SUMMARY_SYM  = 'SPY';
     var MS_SUMMARY_MULT = 10;
     var _msSummaryChart = null;
+    // Same changePercent the visible ↑/↓ % text uses (set in homeUpdateSummary),
+    // so the chart color always matches the text instead of its own trend.
+    var _msLastChangePercent = null;
+
+    // Recolor the chart in place from the current _msLastChangePercent —
+    // called both when new chart data arrives and when a new quote arrives,
+    // so the color updates immediately either way.
+    function applyMsChartColor() {
+        if (!_msSummaryChart) return;
+        var pal = chartPalette(trendPositiveFromChange(_msLastChangePercent));
+        _msSummaryChart.data.datasets[0].borderColor     = pal.line;
+        _msSummaryChart.data.datasets[0].backgroundColor = pal.fill;
+        _msSummaryChart.update('none');
+    }
 
     function homeUpdateSummaryChart(rows) {
         var canvas  = document.getElementById('msSummaryChart');
@@ -882,8 +905,9 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
         if (unavail) unavail.style.display = 'none';
         console.log('[Clarivo Chart] Rendering Market Summary chart');
 
-        var trend = trendFromPair(data[0], data[data.length - 1]);
-        var pal   = chartPalette(trend.positive);
+        // Color from the same changePercent the visible ↑/↓ % text uses —
+        // not from this chart's own first/last point — so they always match.
+        var pal = chartPalette(trendPositiveFromChange(_msLastChangePercent));
 
         if (_msSummaryChart) {
             _msSummaryChart.data.labels = data.map(function (_, i) { return i; });
@@ -983,6 +1007,8 @@ console.log('[Clarivo] Web build version: final-hosting-fix-2026-06-29');
             change.textContent = fChg(data.dp);
             change.className   = 'ms-index-change ' + (data.dp >= 0 ? 'positive' : 'negative');
         }
+        _msLastChangePercent = data.dp;
+        applyMsChartColor();
         var stats = document.querySelectorAll('.ms-stat-row .ms-stat-value');
         if (stats[0]) stats[0].textContent = (data.o * 10).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         if (stats[1]) { stats[1].textContent = (data.h * 10).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); stats[1].className = 'ms-stat-value positive'; }
